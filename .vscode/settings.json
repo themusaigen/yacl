@@ -1,0 +1,16 @@
+{
+  "[lua]": {
+    "files.encoding": "windows1251"
+  },
+  "editor.defaultFormatter": "sumneko.lua",
+  "Lua.runtime.version": "LuaJIT",
+  "Lua.runtime.path": [
+    "tests/?.lua",
+    "tests/?/init.lua",
+    "src/?.lua",
+    "src/?/init.lua"
+  ],
+  "Lua.diagnostics.globals": [
+    "main"
+  ]
+}

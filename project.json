@@ -1,0 +1,14 @@
+{
+  "name": "yacl",
+  "library": "src",
+  "source": "tests",
+  "build": {
+    "output": "dist",
+    "additionalDirs": []
+  },
+  "distribute": {
+    "output": "dist",
+    "additionalDirs": [],
+    "ignoredDirs": []
+  }
+}
