@@ -78,6 +78,33 @@ function IPerson:__len()
 end
 
 local Person = yacl.new(IPerson, IEntity)
+
+---@class Megahuman: Person
+---@field power number
+local IMegahuman = {}
+
+function IMegahuman:constructor(name, age, power, x, y, z)
+  self:super("constructor", name, age, x, y, z)
+
+  self.power = power
+end
+
+function IMegahuman:destructor()
+  print("Destructing mega robot human wtf")
+end
+
+function IMegahuman:teleport(x, y, z)
+  self:super("teleport", x * self.power, y * self.power, z * self.power)
+
+  print("ALERT! MEGA HUMAN TELEPORTING", self.x, self.y, self.z)
+end
+
+function IMegahuman:__call()
+  print("Better call Saul!")
+end
+
+local Megahuman = yacl.new(IMegahuman, IPerson)
+
 do
   local entity = Entity(2, 4, 5)
   assert(tostring(entity) == "Entity(2.0, 4.0, 5.0)")
@@ -104,4 +131,23 @@ do
   print(("Person instanceof of IPerson: %s"):format(person:instanceof(IPerson)))
   -- Instanceof is not available for `IPerson` and `IEntity`
   print(("IPerson instanceof of person: %s"):format(IPerson:parentof(person)))
+end
+
+print("--------------------------------------------------------------------------")
+
+do
+  local megahuman = Megahuman("Robot", 200, 9999, 0, 0, 0)
+  assert(tostring(megahuman) == "Person[Robot, 200](0.0, 0.0, 0.0)")
+  assert(#megahuman == 200)
+
+  megahuman:teleport(2, 2, 2)
+  megahuman:teleport_to_the_oldman()
+
+  print(("Megahuman: %s"):format(tostring(megahuman)))
+  print(("Megahuman instance of IEntity: %s"):format(megahuman:instanceof(IEntity)))
+  print(("Megahuman instance of IPerson: %s"):format(megahuman:instanceof(IPerson)))
+  print(("Megahuman instance of IMegahuman: %s"):format(megahuman:instanceof(IMegahuman)))
+  print(("IEntity parent of IMegahuman: %s"):format(IEntity:parentof(megahuman)))
+  print(("IPerson parent of IMegahuman: %s"):format(IPerson:parentof(megahuman)))
+  print(("IMegahuman parent of IMegahuman: %s"):format(IMegahuman:parentof(megahuman)))
 end
