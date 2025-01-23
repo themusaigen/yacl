@@ -1,7 +1,7 @@
 local yacl = {
   _NAME = "Yacl",
   _DESCRIPTION = "Yet another class library",
-  _VERSION = "1.0.1",
+  _VERSION = "1.1.0",
   _RELEASE = "release",
   _AUTHOR = "Musaigen"
 }
@@ -10,6 +10,8 @@ local yacl = {
 ---@field super fun(self: Class, key: any, ...: any): any
 ---@field instanceof fun(a: any, b: any): boolean # This function should be used when calling it from an instance.
 ---@field parentof fun(a: any, b: any): boolean # This function should be used when calling it from an class object.
+---@field protected constructor fun(self: Class, ...: any)
+---@field protected destructor fun(self: Class)
 
 -- In Lua 5.1 and LuaJIT, which is based on it, adding destructor functionality requires taking roundabout paths.
 local is_lua51 = _VERSION == "Lua 5.1"
